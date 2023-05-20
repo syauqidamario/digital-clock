@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+      <head>
+            <meta charset="UTF-8">
+            <title>DigiClock</title>
+            <link rel="stylesheet" href="theme.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+      </head>
+      <body>
+            <section>
+                  <div class="container">
+                        <div class="icons">
+                              <i class="fas fa-moon"></i>
+                              <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="time">
+                              <div class="time-colon">
+                                    <div class="time-text">
+                                          <span class="num hour_num">13</span>
+                                          <span class="text">Hours</span>
+                                    </div>
+                                    <span class="colon">:</span>
+                              </div>
+                              <div class="time-colon">
+                                    <div class="time-text">
+                                          <span class="num min_num">19</span>
+                                          <span class="text">Minutes</span>
+                                    </div>
+                                    <span class="colon">:</span>
+                              </div>
+                              <div class="time-colon">
+                                    <div class="time-text">
+                                          <span class="num sec_num">19</span>
+                                          <span class="text">Seconds</span>
+                                    </div>
+                                    <span class="am_pm">PM</span>
+                              </div>
+                        </div>
+                  </div>
+            </section>
+            <script>
+                  let section = document.querySelector("section"),
+                  icons = document.querySelector(".icons");
+                  icons.onclick = () => {
+                        section.classList.toggle("dark");
+                  }
+
+                  setInterval(()=>{
+                        let date = new Date(),
+                        hour = date.getHours(),
+                        min = date.getMinutes(),
+                        sec = date.getSeconds();
+
+                        let d;
+
+                        d = hour < 12 ? "AM" : "PM";
+                        //jika jam < 12, maka value-nya AM, kalau bukan, ya PM
+                        hour = hour > 12 ? hour - 12 : hour;
+                        //jika nilai jam > 12, maka 12 akan dikurangi, sehingga kita akan mendapatkan value setelah 12 bukan 13, 14, atau 24
+                        hour = hour == 0 ? hour = 12 : hour; 
+                        //jika value jam adalah 0, maka value-nya akan sama dengan 12
+
+                        //menambahkan 0 di depan seluruh nilai jika mereka kurang dari 10
+                        hour = hour < 10?"0" + hour : hour;
+                        min = min < 10?"0" + min : min;
+                        sec = sec < 10?"0" + sec : sec;
+
+                        document.querySelector(".hour_num").innerText = hour;
+                        document.querySelector(".min_num").innerText = min;
+                        document.querySelector(".sec_num").innerText = sec;
+                        document.querySelector(".am_pm").innerText = d;
+                  }, 1000); // 1000 milisekon = 1 detik
+            </script>
+      </body>
+</html>
